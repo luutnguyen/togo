@@ -1,11 +1,11 @@
-package io.togo.flow;
+package togo.backend.flow;
 
-import io.togo.base.TogoTask;
-import io.togo.base.TogoWorkflow;
-import io.togo.entity.event.CrawlerEvent;
-import io.togo.task.DemoTask;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
+import togo.backend.base.TogoTask;
+import togo.backend.base.TogoWorkflow;
+import togo.backend.entity.event.CrawlerEvent;
+import togo.backend.task.DemoTask;
 
 import javax.inject.Inject;
 

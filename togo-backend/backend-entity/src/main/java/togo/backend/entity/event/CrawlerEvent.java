@@ -1,10 +1,10 @@
-package io.togo.entity.event;
+package togo.backend.entity.event;
 
-import io.togo.entity.StdTogoEvent;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import togo.backend.entity.StdTogoEvent;
 
 import java.util.Date;
 

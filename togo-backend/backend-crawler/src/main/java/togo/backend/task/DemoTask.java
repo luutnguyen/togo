@@ -1,9 +1,9 @@
-package io.togo.task;
+package togo.backend.task;
 
-import io.togo.base.TogoTask;
-import io.togo.entity.event.CrawlerEvent;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
+import togo.backend.base.TogoTask;
+import togo.backend.entity.event.CrawlerEvent;
 
 import javax.inject.Inject;
 

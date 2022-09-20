@@ -1,4 +1,4 @@
-package io.togo.entity;
+package togo.backend.entity;
 
 import lombok.Getter;
 import lombok.Setter;
