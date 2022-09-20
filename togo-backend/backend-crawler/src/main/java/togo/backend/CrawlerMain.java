@@ -13,6 +13,7 @@ public class CrawlerMain {
         DemoTask demoTask = new DemoTask();
         DemoFlow demoFlow = new DemoFlow(demoTask);
         DemoRedFlagFlow demoRedFlagFlow = new DemoRedFlagFlow(demoTask, demoFlow);
+
         demoFlow.run(event, event).onComplete(result -> System.out.println(result.succeeded()));
         demoRedFlagFlow.run(event, event).onComplete(result -> System.out.println(result.succeeded()));
     }
