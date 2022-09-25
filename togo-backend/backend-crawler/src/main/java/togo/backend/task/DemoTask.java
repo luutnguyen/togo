@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.core.json.JsonObject;
 import togo.backend.base.TogoTask;
-import togo.backend.entity.event.CrawlerEvent;
+import togo.backend.entity.CrawlerEvent;
 
 import javax.inject.Inject;
 import java.util.Date;

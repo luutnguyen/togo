@@ -2,7 +2,7 @@ package togo.backend;
 
 import io.vertx.core.json.JsonObject;
 import togo.backend.base.TogoLogger;
-import togo.backend.entity.event.CrawlerEvent;
+import togo.backend.entity.CrawlerEvent;
 import togo.backend.flow.DemoFailFlow;
 import togo.backend.flow.DemoFlow;
 import togo.backend.task.DemoTask;
