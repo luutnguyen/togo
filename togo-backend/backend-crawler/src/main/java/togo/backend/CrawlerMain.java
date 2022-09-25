@@ -3,6 +3,7 @@ package togo.backend;
 import io.vertx.core.json.JsonObject;
 import togo.backend.base.TogoLogger;
 import togo.backend.entity.event.CrawlerEvent;
+import togo.backend.flow.DemoFailFlow;
 import togo.backend.flow.DemoFlow;
 import togo.backend.task.DemoTask;
 
@@ -21,8 +22,10 @@ public class CrawlerMain {
 
         DemoTask demoTask = new DemoTask();
         DemoFlow demoFlow = new DemoFlow(demoTask);
+        DemoFailFlow demoFailFlow = new DemoFailFlow(demoTask);
 
         demoTask.run(event).onComplete(result -> log.info("demoTask = " + result.succeeded()));
         demoFlow.run(event).onComplete(result -> log.info("demoFlow = " + result.succeeded()));
+        demoFailFlow.run(event).onComplete(result -> log.info("demoFailFlow = " + result.succeeded()));
     }
 }

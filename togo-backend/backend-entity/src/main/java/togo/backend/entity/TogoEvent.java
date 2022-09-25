@@ -11,4 +11,5 @@ public abstract class TogoEvent {
 
     private String eventId = UUID.randomUUID().toString();
     private boolean redFlag = false;
+    private Throwable cause;
 }
