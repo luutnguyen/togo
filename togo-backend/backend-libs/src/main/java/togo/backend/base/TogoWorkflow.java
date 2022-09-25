@@ -7,34 +7,38 @@ import togo.backend.entity.TogoEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TogoWorkflow<I extends TogoEvent, O extends TogoEvent> extends TogoTask<I, O> {
+public class TogoWorkflow<E extends TogoEvent> extends TogoTask<E> {
 
-    private final List<TogoTask<? super I, ? super O>> taskList = new ArrayList<>();
+    private final List<TogoTask<? super E>> taskList = new ArrayList<>();
 
     @Override
-    protected Future<O> exec(I in, O out) {
-        return runOneTask(taskList, in, out, 0);
+    protected Future<E> exec(E event) {
+        return runOneTask(taskList, event, 0);
     }
 
-    private Future<O> runOneTask(List<TogoTask<? super I, ? super O>> tasks, I in, O out, final int step) {
-        Promise<O> promise = Promise.promise();
-        System.out.println("Step = " + step);
-        System.out.println("redFlag = " + out.isRedFlag());
+    private Future<E> runOneTask(List<TogoTask<? super E>> tasks, E event, final int step) {
+        Promise<E> promise = Promise.promise();
+        if (0 == step) {
+            log.info("START FLOW");
+        }
+        log.debug("Step = " + step);
+        log.debug("redFlag = " + event.isRedFlag());
         if (step == tasks.size()) {
-            promise.complete(out);
-        } else if (!out.isRedFlag()) {
-            tasks.get(step).run(in, out)
+            promise.complete(event);
+            log.info("END FLOW");
+        } else if (!event.isRedFlag()) {
+            TogoTask<? super E> task = tasks.get(step);
+            task.run(event)
                     .onFailure(promise::fail)
-                    .onSuccess(done -> promise.complete((O) done))
-                    .onComplete(result -> runOneTask(tasks, in, out, step + 1));
+                    .onSuccess(done -> promise.complete((E) done))
+                    .onComplete(result -> runOneTask(tasks, event, step + 1));
         } else {
-            runOneTask(tasks, in, out, step + 1);
+            runOneTask(tasks, event, step + 1);
         }
         return promise.future();
     }
 
-    public TogoWorkflow<I, O> addTask(TogoTask<? super I, ? super O> togoTask) {
+    public void addTask(TogoTask<? super E> togoTask) {
         taskList.add(togoTask);
-        return this;
     }
 }

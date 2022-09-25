@@ -2,25 +2,28 @@ package togo.backend.task;
 
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
+import io.vertx.core.json.JsonObject;
 import togo.backend.base.TogoTask;
 import togo.backend.entity.event.CrawlerEvent;
 
 import javax.inject.Inject;
+import java.util.Date;
+import java.util.UUID;
 
-public class DemoTask extends TogoTask<CrawlerEvent, CrawlerEvent> {
+public class DemoTask extends TogoTask<CrawlerEvent> {
 
     @Inject
     public DemoTask() {
     }
 
     @Override
-    protected Future<CrawlerEvent> exec(CrawlerEvent in, CrawlerEvent out) {
+    protected Future<CrawlerEvent> exec(CrawlerEvent event) {
         Promise<CrawlerEvent> promise = Promise.promise();
-        out = in;
-        out.setEventId("in");
-        System.out.println("Task 1: " + in);
-        System.out.println("Task 1: " + out);
-        promise.complete(out);
+        event.setEventId(UUID.randomUUID().toString());
+        event.setFromDate(new Date(System.currentTimeMillis()));
+        event.setToDate(new Date(System.currentTimeMillis()));
+        promise.complete(event);
+        log.info("Event = " + JsonObject.mapFrom(event));
         return promise.future();
     }
 }

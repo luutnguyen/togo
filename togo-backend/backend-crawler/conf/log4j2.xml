@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="Console">
+            <PatternLayout
+                    pattern="%highlight{[%level]}{NOTICE=Bright magenta} %cyan{%d{HH:mm:ss.SSS}} %blue{%26.26t} %magenta{[%c{1}]}%cyan{%notEmpty{ [%markerSimpleName]}} %highlight{%m%n%ex}{INFO=normal, DEBUG=normal, TRACE=normal, NOTICE=magenta}"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="DEBUG">
+            <AppenderRef ref="Console" level="INFO"/>
+        </Root>
+    </Loggers>
+</Configuration>
